@@ -40,4 +40,8 @@ Github issues tracker.
    myself and merge your code into main branch.
 
 
+# TODO   
+PyDocs for methods. As temp solution, you can use [this] link to see params and results.
+
 [there]: https://curseforgeapi.docs.apiary.io/
+[this]: https://curseforgeapi.docs.apiary.io/
