@@ -18,6 +18,7 @@ setup(
         'selenium',
 
     ],
+    url="https://github.com/CyberSteve777/CurseAppAPI",
     python_requires=">=3.6",
     keywords=['python', 'minecraft', 'curseforge'],
     classifiers=[
