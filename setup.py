@@ -20,6 +20,7 @@ setup(
         'webdriver-manager'
     ],
     url="https://github.com/CyberSteve777/CurseAppAPI",
+    download_url="https://github.com/CyberSteve777/CurseAppAPI/releases",
     python_requires=">=3.6",
     keywords=['python', 'minecraft', 'curseforge'],
     classifiers=[
