@@ -21,11 +21,22 @@ class CurseAPI:
         self.__web.headers = _headers
 
     def search_addon(self, params=None, **kwargs):
+        """
 
-        attr = {"categoryID": int, "gameId": int, "gameVersion": str, "index": int, "pageSize": int,
-                "searchFilter": str, "sectionId": int, "sort": int}
+        :param params:
+        :param kwargs:
+
+        Search addon with the given parameters in params and kwargs dicts. If there are same keys in params and kwargs,
+        the query will be served with params value.
+
+        :return: if successful, returns list of dicts with info about mods found.
+        """
+        attr = {"categoryid": int, "gameid": int, "gameversion": str, "index": int, "pagesize": int,
+                "searchfilter": str, "sectionid": int, "sort": int}
         if params is None:
             params = {}
+        if type(params) != dict:
+            raise InvalidArgumentError("'params' should be a dict object")
         search_params = f"/addon/search?"
         query = get_query(attr, params, kwargs)
         search_params += "&".join(f"{key}={value}" for key, value in query.items())
@@ -34,6 +45,11 @@ class CurseAPI:
         return check_response(self._last_response)
 
     def search_by_fingerprint(self, fingerprint: int):
+        """
+        Searches addon by file fingerprint
+        :param fingerprint:
+        :return:
+        """
         self._last_query_link = self._base_link + "/fingerprint"
         self._last_response = self.__web.request("POST", self._last_query_link, json=[fingerprint])
         return check_response(self._last_response)
@@ -91,12 +107,16 @@ class CurseAPI:
         return check_response(self._last_response)
 
     def get_category_timestamp(self):
+        """
+        Gets category timestamp
+        :return: timestamp in 'str' format
+        """
         self._last_query_link = self._base_link + "/category/timestamp"
         self._last_response = self.__web.request("GET", self._last_query_link)
         return self._last_response.json(strict=False)
 
     def get_featured_addons(self, params=None, **kwargs):
-        attr = {"GameId": int, "addonIds": list, "featuredCount": int, "popularCount": int, "updatedCount": int}
+        attr = {"gameid": int, "addonids": list, "featuredcount": int, "popularcount": int, "updatedcount": int}
         if params is None:
             params = {}
         if type(params) != dict:
@@ -108,16 +128,30 @@ class CurseAPI:
         return self.__web.request("POST", self._last_query_link, json=query).json(strict=False)
 
     def get_game_info(self, GameID: int):
+        """
+        Gets game info by its id
+        :param GameID: id of game on curseforge
+        :return:
+        """
         self._last_query_link = self._base_link + f"/game/{GameID}"
         self._last_response = self.__web.request("GET", self._last_query_link)
         return check_response(self._last_response)
 
     def get_game_timestamp(self):
+        """
+        Get game timestamp
+        :return: timestamp in 'str' format
+        """
         self._last_query_link = self._base_link + "/game/timestamp"
         self._last_response = self.__web.request("GET", self._last_query_link)
         return self._last_response.json(strict=False)
 
     def get_games_list(self, supportsAddons=None):
+        """
+        Returns games list, filtered by supportsAddons criteria. If it's None, it will return total games list
+        :param supportsAddons: True or False
+        :return: dict with info about games, filtered by supportsAddons criteria
+        """
         self._last_query_link = self._base_link + "/game"
         if supportsAddons is not None:
             if type(supportsAddons) == bool:
@@ -128,6 +162,13 @@ class CurseAPI:
         return check_response(self._last_response)
 
     def get_minecraft_version_info(self, VersionString: str):
+        """
+        Returns minecraft version info by given it's version in 'str' object
+
+        Note: works on RELEASES only.
+        :param VersionString: ex. "1.12.2"
+        :return: dict with info about {VersionString} version of minecraft
+        """
         param = f"/minecraft/version/{VersionString}"
         self._last_query_link = self._base_link + param
         self._last_response = self.__web.request("GET", self._last_query_link)

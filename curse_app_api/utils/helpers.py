@@ -21,13 +21,14 @@ def get_query(attr: dict, *args):
     query = {}
     for arg in args:
         for key, value in arg.items():
-            if key not in attr:
+            k = key.lower()
+            if k not in attr:
                 raise InvalidArgumentError(f"'{key}'")
-            elif type(value) != attr[key]:
-                raise InvalidArgumentError(f"'{key}' should have type: {attr[key]}, while type"
+            elif type(value) != attr[key.lower()]:
+                raise InvalidArgumentError(f"'{key}' should have type: {attr[k]}, while type"
                                            f" of value is {type(value)}")
-            elif query.get(key, None) is None:
-                query[key] = value
+            elif query.get(k, None) is None:
+                query[k] = value
     return query
 
 
