@@ -16,7 +16,8 @@ setup(
     install_requires=[
         'requests',
         'selenium',
-
+        'selenium-requests',
+        'webdriver-manager'
     ],
     url="https://github.com/CyberSteve777/CurseAppAPI",
     python_requires=">=3.6",
