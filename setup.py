@@ -23,7 +23,7 @@ setup(
     keywords=['python', 'minecraft', 'curseforge'],
     classifiers=[
         "Intended Audience :: Developers",
-        "Licence :: OSI Approved :: GNU GPL v3.0"
+        "Licence :: OSI Approved :: GNU GPL v3.0",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
