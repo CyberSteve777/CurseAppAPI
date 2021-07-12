@@ -15,6 +15,7 @@ requests>=2.25.1
 selenium>=3.141.0
 selenium-requests>=1.3
 webdriver-manager>=3.4.2
+msedge-selenium-tools>=3.141.3
 ```
 
 
