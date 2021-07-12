@@ -1,3 +1,7 @@
+# importing user agent
+from .helpers import __user_agent
+
+
 # importing webdrivers and options
 
 from seleniumrequests import RequestMixin, Chrome as ChromeRequests
@@ -11,9 +15,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import os
 
-user_agent = "user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) " \
-             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"
-
 
 class WebDriverNotFoundError(BaseException):
     def __init__(self, *args):
@@ -26,7 +27,7 @@ def prepare_chromium_options(options):
     options.add_argument("--disable-logging")
     options.add_argument("--log-level=0")
     options.add_argument("disable-gpu")
-    options.add_argument(user_agent)
+    options.add_argument(__user_agent)
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
     return options

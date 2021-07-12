@@ -1,16 +1,15 @@
 # **Curseforge App API**
 The package provides classes to interact Curseforge app API.
 
-I wrote neither API nor documentation (btw documentation with methods and results took from [there]).
+**Note: I wrote neither API nor documentation** (btw documentation with methods and results took from [there]).
 
-# Installation/Upgrade & Requirements
+# Installation/Upgrade
 
 1) Requires at least python 3.6
 
 2) Install/Upgrade with $ pip install --user --upgrade curse-app-appi
 
-
-# Requirements 
+# Requirements
 ```
 requests>=2.25.1
 selenium>=3.141.0
@@ -30,11 +29,17 @@ api = CurseAPI()
 # example method 
 print(api.get_category_timestamp())
 
-# using with webdriver
+# using API with webdriver
 wdapi = WDCurseAPI()
 
 # it will print the same result as previous print
-print(wdapi.get_category_timestamp()) 
+print(wdapi.get_category_timestamp())
+
+# also if something goes wrong, you can get last query link
+print(api.last_query_link)
+
+# and its response
+print(api.last_response)
 ```
 
 

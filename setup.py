@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 DESCRIPTION = "Cuseforge App API"
 with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
@@ -17,7 +17,8 @@ setup(
         'requests',
         'selenium',
         'selenium-requests',
-        'webdriver-manager'
+        'webdriver-manager',
+        'msedge-selenium-tools'
     ],
     url="https://github.com/CyberSteve777/CurseAppAPI",
     download_url="https://github.com/CyberSteve777/CurseAppAPI/releases",
