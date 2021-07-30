@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "0.0.4"
+VERSION = "1.0.0"
 DESCRIPTION = "Cuseforge App API"
 with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
