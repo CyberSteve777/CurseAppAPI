@@ -18,7 +18,7 @@ setup(
         'selenium',
         'selenium-requests',
         'webdriver-manager',
-        'msedge-selenium-tools'
+        'msedge-selenium-tools',
     ],
     url="https://github.com/CyberSteve777/CurseAppAPI",
     download_url="https://github.com/CyberSteve777/CurseAppAPI/releases",
@@ -33,5 +33,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Operating System :: Microsoft :: Windows",
+        "Operating System :: MacOS",
+        "Operating System :: POSIX :: Linux",
     ]
 )
