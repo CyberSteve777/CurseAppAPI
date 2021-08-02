@@ -9,6 +9,7 @@ setup(
     name="curse_app_api",
     version=VERSION,
     author="CyberSteve777",
+    author_email="cbrstv777@gmail.com",
     description=DESCRIPTION,
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
