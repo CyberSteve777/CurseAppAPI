@@ -1,5 +1,6 @@
 from curse_app_api.utils import get_query, InvalidArgumentError, check_response, headers
 from requests import session, Response
+from typing import List, Dict, Optional, Union
 
 
 class CurseAPI:
@@ -22,7 +23,7 @@ class CurseAPI:
         self._web = session()
         self._web.headers = headers
 
-    def search_addon(self, params=None, **kwargs):
+    def search_addon(self, params: Optional[Dict[str, Union[int, str]]] = None, **kwargs):
         """
         params and kwargs will be merged, from duplicates from params and kwargs the highest priority is on kwargs
         Note: not all parameters required for request, but more parameters will lead to more accurate result
@@ -137,14 +138,14 @@ class CurseAPI:
         self._last_response = self._web.request("GET", self._last_query_link)
         return self._last_response.json(strict=False)
 
-    def get_featured_addons(self, params=None, **kwargs):
+    def get_featured_addons(self, params: Optional[Dict] = None, **kwargs):
         """
         params and kwargs will be merged, from duplicates from params and kwargs the highest priority is on kwargs
         Note: not all parameters required for request, but more parameters will lead to more accurate result
 
         https://curseforgeapi.docs.apiary.io/#/reference/0/get-featured-addons
         """
-        attr = {"gameid": int, "addonids": list, "featuredcount": int, "popularcount": int, "updatedcount": int}
+        attr = {"gameid": int, "addonids": List[int], "featuredcount": int, "popularcount": int, "updatedcount": int}
         if params is None:
             params = {}
         if type(params) != dict:
@@ -171,16 +172,13 @@ class CurseAPI:
         self._last_response = self._web.request("GET", self._last_query_link)
         return self._last_response.json(strict=False)
 
-    def get_games_list(self, supportsAddons=None):
+    def get_games_list(self, supportsAddons: Optional[bool] = None):
         """
         https://curseforgeapi.docs.apiary.io/#/reference/0/get-games-list
         """
         self._last_query_link = self._base_link + "/game"
         if supportsAddons is not None:
-            if type(supportsAddons) == bool:
-                self._last_query_link += f"?supportsAddons={supportsAddons}"
-            else:
-                raise InvalidArgumentError("'supportsAddons' parameter should be True or False")
+            self._last_query_link += f"?supportsAddons={supportsAddons}"
         self._last_response = self._web.request("GET", self._last_query_link)
         return check_response(self._last_response)
 
@@ -200,7 +198,7 @@ class CurseAPI:
         self._last_response = self._web.request("GET", self._last_query_link)
         return check_response(self._last_response)
 
-    def get_minecraft_version_list(self):
+    def get_minecraft_version_list(self) -> Union[List[Dict[str, Union[int, str]]], str]:
         """
         https://curseforgeapi.docs.apiary.io/#/reference/0/get-minecraft-version-list
         """
@@ -241,11 +239,13 @@ class CurseAPI:
         self._last_response = self._web.request("GET", self._last_query_link)
         return self._last_response.json(strict=False)
 
-    def get_multiple_addons(self, params, *args):
+    def get_multiple_addons(self, params: Optional[List[int]] = None, *args):
         """
         params and args will be merged and will be prepared to send unique IDs (set)
         https://curseforgeapi.docs.apiary.io/#/reference/0/get-multiple-addons
         """
+        if params is None:
+            params = []
         query = list(set(params + list(args)))
         for e in query:
             if type(e) != int:

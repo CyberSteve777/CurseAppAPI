@@ -2,7 +2,7 @@ Project description might be outdated on [PyPI], latest version available on [Gi
 
 
 # **Curseforge App API**
-The package provides classes to interact Curseforge app API.
+The package provides classes to interact with Curseforge app API.
 
 **Note: I wrote neither API nor documentation** (btw documentation with methods and results took from [there]).
 
